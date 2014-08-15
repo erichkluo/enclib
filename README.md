@@ -1,3 +1,5 @@
+中文版说明请向下滚动.
+
 Enclib
 ======
 
@@ -5,18 +7,18 @@ Enclib is an enhanced encryption library wrapper for Python by Exted Luo (extedl
 
 WARNING: The library itself is still under active development. Algorithms may be modified without backwards compatibility support. Please DO NOT use it in production environment until the stable version is released. 
 
-# Features
+## Features
 
 - Cascaded encryption (CAST5-Blowfish-AES) 
 - Built-in key strengthening function which increases the difficult of brute-force attack and rainbow table attack.
 - Built-in version identification function
 
-# Requirements
+## Requirements
 
 - Python 2.7
 - Pycrypto 2.6.1 (https://www.dlitz.net/software/pycrypto/)
 
-# Example
+## Example
 
 	from enclib import *
 
@@ -28,7 +30,7 @@ WARNING: The library itself is still under active development. Algorithms may be
 	rawtext = enc.decrypt(key, enctext)
 	print rawtext
 
-# Security Audit
+## Security Audit
 
 You are welcome to audit the scripts and provide feedback on its functions or vulnerability.
 
@@ -40,18 +42,18 @@ Enclib 是一个增强型 Python 加密库。 作者： Exted Luo (extedluo.com)
 
 警告: 截至当前 Enclib 目前仍处在初步开发阶段。在稳定版本发布之前，该库的算法可能会被更改而不提供向后的兼容支持，所以请暂时不要用在生产环境当中。
 
-# 特色
+## 特色
 
 - 层叠加密算法 (CAST5-Blowfish-AES) 
 - 内置密匙增强功能。该功能可以增加暴力破解或者利用彩虹表破解的难度。
 - 内置版本核对功能。
 
-# 要求
+## 要求
 
 - Python 2.7
 - Pycrypto 2.6.1 (https://www.dlitz.net/software/pycrypto/)
 
-# 例子
+## 例子
 
 	from enclib import *
 
@@ -63,6 +65,6 @@ Enclib 是一个增强型 Python 加密库。 作者： Exted Luo (extedluo.com)
 	rawtext = enc.decrypt(key, enctext)
 	print rawtext
 
-# 安全审核
+## 安全审核
 
 欢迎任何人审核该库的代码并向我们提供反馈。
