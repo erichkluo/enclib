@@ -9,7 +9,7 @@ WARNING: The library itself is still under active development. Algorithms may be
 
 ## Features
 
-- Cascaded encryption (CAST5-Blowfish-AES) 
+- Cascaded encryption (AES-Blowfish-CAST5) 
 - Built-in key strengthening function which increases the difficult of brute-force attack and rainbow table attack.
 - Built-in version identification function
 
@@ -49,7 +49,7 @@ Enclib 是一个增强型 Python 加密库。
 
 ## 特色
 
-- 层叠加密算法 (CAST5-Blowfish-AES) 
+- 层叠加密算法 (AES-Blowfish-CAST5) 
 - 内置密匙增强功能。该功能可以增加暴力破解或者利用彩虹表破解的难度。
 - 内置版本核对功能。
 

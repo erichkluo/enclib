@@ -40,8 +40,8 @@ class Enclibv1:
     Encryption Methods & Algorithms Librayr Version 1.
     THE FIRST VERSION OF THIS LIBRARY IS STILL UNDER ACTIVE DEVELOPMENT. BACKWARDS COMPATIBILITY SUPPORT MAY NOT BE PROVIDED. PLEASE DO NOT USE IT FOR PRODUCTION.
     Usage:
-    encrypt(key, content): cascaded encryption using CAST5-Blowfish-AES, with key strengthening.
-    decrypt(key, content): cascaded decryption using CAST5-Blowfish-AES, with key strengthening.
+    encrypt(key, content)
+    decrypt(key, content)
     """
     STRENGTH=32
     SALT_LENGTH=64
@@ -125,7 +125,7 @@ class Enclibv1:
 
     def encrypt(self, key, content):
         """
-        Enclib v1 Cascaded encryption using CAST5-Blowfish-AES, with key strengthening.
+        Enclib v1 Cascaded encryption using AES-Blowfish-CAST5, with key strengthening.
         Example: 
             encrypt(key="password", content="TOPSECRET")
         Parameter:
@@ -138,7 +138,7 @@ class Enclibv1:
         # CAST5-Blowfish-AES
         salt=Enclibv1_strong_random(self.SALT_LENGTH)
         keys = self.make_keys(key, salt) # Salt will also be generated.
-        ciphers=[self.CASTCipher(keys[0]), self.BlowfishCipher(keys[1]), self.AESCipher(keys[2])]
+        ciphers=[self.AESCipher(keys[0]), self.BlowfishCipher(keys[1]), self.CASTCipher(keys[2])]
         # Generate header with random string
         header="TRUE"+self.SD_VERSION
         header=header+Enclibv1_strong_random(16-len(header))
@@ -151,7 +151,7 @@ class Enclibv1:
 
     def decrypt(self, key, content):
         """
-        Enclib v1 Cascaded decryption using CAST5-Blowfish-AES, with key strengthening.
+        Enclib v1 Cascaded decryption using AES-Blowfish-CAST5, with key strengthening.
         Example: 
             decrypt(key="password", content="ENCRYPTED_CONTENT")
         Parameter:
@@ -171,7 +171,7 @@ class Enclibv1:
         assert len(header) == self.ENCRYPTED_HEADER_LENGTH
         content = content[self.SALT_LENGTH+self.ENCRYPTED_HEADER_LENGTH:]
         keys = self.make_keys(key, salt)
-        ciphers=[self.AESCipher(keys[2]), self.BlowfishCipher(keys[1]), self.CASTCipher(keys[0])]
+        ciphers=[self.CASECipher(keys[2]), self.BlowfishCipher(keys[1]), self.AESCipher(keys[0])]
         # Check header validity first
         for cipher in ciphers:
             header = cipher.decrypt(header)
