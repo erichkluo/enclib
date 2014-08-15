@@ -171,7 +171,7 @@ class Enclibv1:
         assert len(header) == self.ENCRYPTED_HEADER_LENGTH
         content = content[self.SALT_LENGTH+self.ENCRYPTED_HEADER_LENGTH:]
         keys = self.make_keys(key, salt)
-        ciphers=[self.CASECipher(keys[2]), self.BlowfishCipher(keys[1]), self.AESCipher(keys[0])]
+        ciphers=[self.CASTCipher(keys[2]), self.BlowfishCipher(keys[1]), self.AESCipher(keys[0])]
         # Check header validity first
         for cipher in ciphers:
             header = cipher.decrypt(header)
