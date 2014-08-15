@@ -3,7 +3,7 @@
 Enclib
 ======
 
-Enclib is an enhanced encryption library wrapper for Python by Exted Luo (extedluo.com)
+Enclib is an enhanced encryption library wrapper for Python by @exted (http://extedluo.com)
 
 WARNING: The library itself is still under active development. Algorithms may be modified without backwards compatibility support. Please DO NOT use it in production environment until the stable version is released. 
 
@@ -20,15 +20,19 @@ WARNING: The library itself is still under active development. Algorithms may be
 
 ## Example
 
-	from enclib import *
+```python
+#!/usr/bin/env python
 
-	rawtext="This is the content."
-	key="password"
-	enc=Enclibv1()
-	enctext = enc.encrypt(key, rawtext)
-	print enctext.encode('hex')
-	rawtext = enc.decrypt(key, enctext)
-	print rawtext
+from enclib import *
+
+rawtext="This is the content."
+key="password"
+enc=Enclibv1()
+enctext = enc.encrypt(key, rawtext)
+print enctext.encode('hex')
+rawtext = enc.decrypt(key, enctext)
+print rawtext
+```
 
 ## Security Audit
 
@@ -38,7 +42,8 @@ You are welcome to audit the scripts and provide feedback on its functions or vu
 Enclib
 ======
 
-Enclib 是一个增强型 Python 加密库。 作者： Exted Luo (extedluo.com)
+Enclib 是一个增强型 Python 加密库。 
+作者: @exted (http://extedluo.com)
 
 警告: 截至当前 Enclib 目前仍处在初步开发阶段。在稳定版本发布之前，该库的算法可能会被更改而不提供向后的兼容支持，所以请暂时不要用在生产环境当中。
 
@@ -54,16 +59,19 @@ Enclib 是一个增强型 Python 加密库。 作者： Exted Luo (extedluo.com)
 - Pycrypto 2.6.1 (https://www.dlitz.net/software/pycrypto/)
 
 ## 例子
+```python
+#!/usr/bin/env python
 
-	from enclib import *
+from enclib import *
 
-	rawtext="This is the content."
-	key="password"
-	enc=Enclibv1()
-	enctext = enc.encrypt(key, rawtext)
-	print enctext.encode('hex')
-	rawtext = enc.decrypt(key, enctext)
-	print rawtext
+rawtext="This is the content."
+key="password"
+enc=Enclibv1()
+enctext = enc.encrypt(key, rawtext)
+print enctext.encode('hex')
+rawtext = enc.decrypt(key, enctext)
+print rawtext
+```
 
 ## 安全审核
 
