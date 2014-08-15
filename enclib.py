@@ -47,7 +47,7 @@ class Enclibv1:
     SALT_LENGTH=64
     KEY_LENGTH=96
     HEADER_LENGTH=512
-    ENCRYPTED_HEADER_LENGTH=112 
+    ENCRYPTED_HEADER_LENGTH=88
     SD_VERSION="01"
     ITERATIONS=3141
 
@@ -64,7 +64,7 @@ class Enclibv1:
     def strong_hash(self, key, salt, length, method):
         return PBKDF2(key, salt, dkLen=length, count=self.ITERATIONS, prf=method)
 
-    class AESCipher: #32bytes 的 key, block_size=16
+    class AESCipher: #32bytes key, block_size=16
         def __init__(self, key):
             self.bs = 32
             if len(key) >= 32:
@@ -81,7 +81,7 @@ class Enclibv1:
             cipher = AES.new(self.key, AES.MODE_CBC, iv)
             return Enclibv1_unpad(cipher.decrypt(enc[AES.block_size:]), self.bs)
 
-    class BlowfishCipher: #32bytes 的 key, block_size=16
+    class BlowfishCipher: #32bytes key, block_size=8
         def __init__(self, key):
             self.bs=32
             if len(key)>=32:
@@ -98,7 +98,7 @@ class Enclibv1:
             cipher = Blowfish.new(self.key, Blowfish.MODE_CBC, iv)
             return Enclibv1_unpad(cipher.decrypt(enc[Blowfish.block_size:]), self.bs)
 
-    class CASTCipher: #16 bytes 的 key, block_size=8
+    class CASTCipher: #16 bytes key, block_size=8
         def __init__(self, key):
             self.bs=16
             if len(key)>=16:
@@ -134,19 +134,14 @@ class Enclibv1:
         Returns:
             (str) the encrypted content
         """
-        # Encrypt a block
-        # CAST5-Blowfish-AES
         salt=Enclibv1_strong_random(self.SALT_LENGTH)
-        keys = self.make_keys(key, salt) # Salt will also be generated.
+        keys = self.make_keys(key, salt)
         ciphers=[self.AESCipher(keys[0]), self.BlowfishCipher(keys[1]), self.CASTCipher(keys[2])]
-        # Generate header with random string
         header="TRUE"+self.SD_VERSION
         header=header+Enclibv1_strong_random(16-len(header))
-        # Encryption process and header generation
         for cipher in ciphers:
             content=cipher.encrypt(content)
             header=cipher.encrypt(header)
-        # Encrypted header shoule be 112 byte long.
         return salt+header+content
 
     def decrypt(self, key, content):
@@ -164,7 +159,6 @@ class Enclibv1:
                 or the password may be incorrected.
             VersionError: This version does not support this standard.
         """
-        # AES-Blowfish-CAST5
         salt = content[:self.SALT_LENGTH]
         assert len(salt) == self.SALT_LENGTH
         header = content[self.SALT_LENGTH:self.SALT_LENGTH+self.ENCRYPTED_HEADER_LENGTH]
@@ -172,7 +166,6 @@ class Enclibv1:
         content = content[self.SALT_LENGTH+self.ENCRYPTED_HEADER_LENGTH:]
         keys = self.make_keys(key, salt)
         ciphers=[self.CASTCipher(keys[2]), self.BlowfishCipher(keys[1]), self.AESCipher(keys[0])]
-        # Check header validity first
         for cipher in ciphers:
             header = cipher.decrypt(header)
         magicheader = header[:4]
@@ -181,7 +174,6 @@ class Enclibv1:
             raise DecryptError
         if version != self.SD_VERSION:
             raise VersionError
-        # Decryption process
         for cipher in ciphers:
             content = cipher.decrypt(content)
         return content
