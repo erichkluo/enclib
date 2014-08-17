@@ -68,7 +68,7 @@ from enclib import *
 
 rawtext="This is the content."
 key="password"
-enc=Enclibv1()
+enc=Enclib()
 enctext = enc.encrypt(key, rawtext)
 print enctext.encode('hex')
 rawtext = enc.decrypt(key, enctext)
