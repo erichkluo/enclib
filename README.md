@@ -11,7 +11,8 @@ WARNING: The library itself is still under active development. Algorithms may be
 
 - Cascaded encryption (AES-Blowfish-CAST5) 
 - Built-in key strengthening function which increases the difficult of brute-force attack and rainbow table attack.
-- Built-in version identification function
+- Quick mode using AES256 with key strengthening
+- General class with built-in version identification function
 
 ## Requirements
 
@@ -27,7 +28,7 @@ from enclib import *
 
 rawtext="This is the content."
 key="password"
-enc=Enclibv1()
+enc=Enclib()
 enctext = enc.encrypt(key, rawtext)
 print enctext.encode('hex')
 rawtext = enc.decrypt(key, enctext)
@@ -51,7 +52,8 @@ Enclib 是一个增强型 Python 加密库。
 
 - 层叠加密算法 (AES-Blowfish-CAST5) 
 - 内置密匙增强功能。该功能可以增加暴力破解或者利用彩虹表破解的难度。
-- 内置版本核对功能。
+- 使用 AES256 加密的快速模式
+- 内置版本核对功能的通用库
 
 ## 要求
 
