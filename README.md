@@ -3,7 +3,7 @@
 Enclib
 ======
 
-Enclib is an enhanced encryption library wrapper for Python by Exted (http://extedluo.com)
+Enclib is an enhanced encryption library wrapper for Python
 
 WARNING: The library itself is still under active development. Algorithms may be modified without backwards compatibility support. Please DO NOT use it in production environment until the stable version is released. 
 
@@ -44,7 +44,6 @@ Enclib
 ======
 
 Enclib 是一个增强型 Python 加密库。 
-作者: Exted (http://extedluo.com)
 
 警告: 截至当前 Enclib 目前仍处在初步开发阶段。在稳定版本发布之前，该库的算法可能会被更改而不提供向后的兼容支持，所以请暂时不要用在生产环境当中。
 
